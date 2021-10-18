@@ -1,18 +1,16 @@
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class TwoSumAlgorithm {
 
     public int[] getTwoSum(int[] nums, int target) {
-        for (int i = 0; i < nums.length - 1 ; i++) {
-            int difference = target - nums[i];
-            for( int j = i +1, k = nums.length - 1; j <= k; j++, k--) {
-                if( nums[j] == difference) {
-                    return new int[] {i, j};
-                }
-                if(nums[k] == difference) {
-                    return new int[] {i, k};
-                }
+        Map<Integer, Integer> numsMap = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if( numsMap.containsKey(complement)) {
+                return new int[] {numsMap.get(complement), i};
             }
+            numsMap.put(nums[i], i);
         }
         return null;
     }
